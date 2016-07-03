@@ -1280,6 +1280,14 @@ PrintConfigDef::PrintConfigDef()
         def->default_value = opt;
     }
 
+    def = this->add("coast", coFloat);
+    def->label = "Coast";
+    def->tooltip = "Distance to coast between lines.";
+    def->sidetext = "mm";
+    def->cli = "coast=f";
+    def->min = 0;
+    def->default_value = new ConfigOptionFloat(0);
+
     def = this->add("xy_size_compensation", coFloat);
     def->label = "XY Size Compensation";
     def->category = "Advanced";

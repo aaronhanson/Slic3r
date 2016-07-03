@@ -365,6 +365,7 @@ class PrintConfig : public GCodeConfig
     ConfigOptionInt                 threads;
     ConfigOptionFloat               vibration_limit;
     ConfigOptionBools               wipe;
+    ConfigOptionFloat               coast;
     ConfigOptionFloat               z_offset;
     
     PrintConfig() : GCodeConfig() {
@@ -421,6 +422,7 @@ class PrintConfig : public GCodeConfig
         OPT_PTR(threads);
         OPT_PTR(vibration_limit);
         OPT_PTR(wipe);
+        OPT_PTR(coast);
         OPT_PTR(z_offset);
         
         // look in parent class

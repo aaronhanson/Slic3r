@@ -447,6 +447,7 @@ $j
     --retract-layer-change
                         Enforce a retraction before each Z move (default: no)
     --wipe              Wipe the nozzle while doing a retraction (default: no)
+    --coast             Distance in mm to stop extruding before end of line (default: 0)
     
    Retraction options for multi-extruder setups:
     --retract-length-toolchange

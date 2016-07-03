@@ -573,11 +573,25 @@ GCode::_extrude(ExtrusionPath path, std::string description, double speed)
         for (Lines::const_iterator line = lines.begin(); line != lines.end(); ++line) {
             const double line_length = line->length() * SCALING_FACTOR;
             path_length += line_length;
-            
+            double extrude_length = line_length;
+
+            // check path for type to do different things regarding coasting
+            std::ostringstream coast_comment;
+            if (line == --lines.end()) {
+                if (line_length > this->config.coast.value) {
+                    // need to multiple by SCALING_FACTOR?
+                    extrude_length -= this->config.coast.value;
+                    coast_comment << " coast (" << this->config.coast.value << ")mm";
+                } else {
+                    coast_comment << " coast full";
+                    extrude_length = 0;
+                }
+            }
+
             gcode += this->writer.extrude_to_xy(
                 this->point_to_gcode(line->b),
-                e_per_mm * line_length,
-                comment
+                e_per_mm * extrude_length,
+                comment += coast_comment.str()
             );
         }
     }
